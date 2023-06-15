@@ -1,8 +1,12 @@
 import ContactItem from '../ContactItem';
-import PropTypes from 'prop-types';
 import css from './ContactList.module.css'
+import { useSelector } from 'react-redux';
+import { getContacts, getFilter } from 'Redux/selectors';
 
-const ContactList = ({ contacts, filter, handleDeleteContact }) => {
+const ContactList = () => {
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+
   return (
     <ul className={css.contactList}>
       {contacts
@@ -12,24 +16,11 @@ const ContactList = ({ contacts, filter, handleDeleteContact }) => {
             key={id}
             name={name}
             number={number}
-            handleDeleteContact={handleDeleteContact}
             contactId={id}
           />
         ))}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  handleDeleteContact: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
 };
 
 export default ContactList;

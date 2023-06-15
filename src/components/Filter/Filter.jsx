@@ -1,10 +1,17 @@
 import { useRef } from 'react';
-import PropTypes from 'prop-types';
 import css from './Filter.module.css'
 import { nanoid } from 'nanoid';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeFilterContacts } from 'Redux/filterSlice';
+import { getFilter } from 'Redux/selectors';
 
-const Filter = ({ handleChangeFilter, filter }) => {
+const Filter = () => {
   const filterInputId = useRef(nanoid());
+
+  const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
+
+  const handleChangeFilter = ({ target: { value } }) => dispatch(changeFilterContacts(value));
 
   return (
     <div className={css.filterBox}>
@@ -24,11 +31,6 @@ const Filter = ({ handleChangeFilter, filter }) => {
       />
     </div>
   );
-};
-
-Filter.propTypes = {
-  handleChangeFilter: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
 };
 
 export default Filter;

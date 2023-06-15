@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
 import { FaTrash } from 'react-icons/fa';
 import css from './ContactItem.module.css';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'Redux/contactsSlice';
 
-const ContactItem = ({ name, number, handleDeleteContact, contactId }) => {
+const ContactItem = ({ name, number, contactId }) => {
+  const dispatch = useDispatch();
+
   return (
     <li className={css.contactItem}>
       <div>
@@ -13,7 +17,7 @@ const ContactItem = ({ name, number, handleDeleteContact, contactId }) => {
       <button
         type="button"
         className={css.button}
-        onClick={() => handleDeleteContact(contactId)}
+        onClick={() => dispatch(deleteContact(contactId))}
       >
         <FaTrash />
       </button>
@@ -23,7 +27,6 @@ const ContactItem = ({ name, number, handleDeleteContact, contactId }) => {
 
 ContactItem.propTypes = {
   name: PropTypes.string.isRequired,
-  handleDeleteContact: PropTypes.func.isRequired,
   number: PropTypes.string.isRequired,
   contactId: PropTypes.string.isRequired
 };
