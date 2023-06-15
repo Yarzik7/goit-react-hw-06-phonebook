@@ -6,23 +6,27 @@ import { nanoid } from 'nanoid';
 import css from './App.module.css';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 import { showNotifyReport } from 'js/notifyFunc';
+import { useSelector } from 'react-redux';
+import { getContacts } from 'Redux/contactsSlice';
 
 const App = () => {
-  const [contacts, setContacts] = useLocalStorage('contacts', []);
-  const [filter, setFilter] = useState('');
+  // const [contacts, setContacts] = useLocalStorage('contacts', []);
+  // const [filter, setFilter] = useState('');
 
-  const handleChangeFilter = ({ target: { value } }) => setFilter(value);
+  // const handleChangeFilter = ({ target: { value } }) => setFilter(value);
      
-  const handleSubmit = contactFormStates => {
-    const { name, number } = contactFormStates;
-    const newContact = { id: nanoid(), name, number };
+  // const handleSubmit = contactFormStates => {
+  //   const { name, number } = contactFormStates;
+  //   const newContact = { id: nanoid(), name, number };
 
-    contacts.some(({ name: contactName }) => contactName.toLowerCase() === name.toLowerCase())
-      ? showNotifyReport(`${name} is already in contact`, 'reportWarning')
-      : setContacts(contacts => [...contacts, newContact]);
-  };
+  //   contacts.some(({ name: contactName }) => contactName.toLowerCase() === name.toLowerCase())
+  //     ? showNotifyReport(`${name} is already in contact`, 'reportWarning')
+  //     : setContacts(contacts => [...contacts, newContact]);
+  // };
 
-  const handleDeleteContact = contactId => setContacts(contacts => contacts.filter(({ id }) => contactId !== id));
+  // const handleDeleteContact = contactId => setContacts(contacts => contacts.filter(({ id }) => contactId !== id));
+
+  const contacts = useSelector(getContacts);
 
   return (
     <div className={css.app}>
