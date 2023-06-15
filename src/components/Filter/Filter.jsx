@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import css from './Filter.module.css'
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeFilterContacts } from 'Redux/filterSlice';
+import { changeFilter } from 'Redux/filterSlice';
 import { getFilter } from 'Redux/selectors';
 
 const Filter = () => {
@@ -11,7 +11,7 @@ const Filter = () => {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
-  const handleChangeFilter = ({ target: { value } }) => dispatch(changeFilterContacts(value));
+  const handleChangeFilter = ({ target: { value } }) => dispatch(changeFilter(value));
 
   return (
     <div className={css.filterBox}>
