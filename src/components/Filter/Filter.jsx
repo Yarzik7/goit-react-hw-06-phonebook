@@ -22,7 +22,7 @@ const Filter = () => {
         type="text"
         name="filter"
         id={filterInputId.current}
-        pattern="^[a-zA-Za-яА-Я]+(([' -][a-zA-Za-яА-Я ])?[a-zA-Za-яА-Я]*)*$"
+        pattern="^[A-Za-z\u0080-\uFFFF\- ']+$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
         className={css.input}
